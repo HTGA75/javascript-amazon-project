@@ -21,10 +21,6 @@ export function renderOrderSummary() {
   const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
   const dateString = deliveryDate.format('dddd, MMMM D');
 
-  console.log(dateString);
-
-  console.log(matchingProduct);
-
   cartSummary += 
   `<div class="cart-item-container js-cart-item-container js-cart-item-container-${matchingProduct.id}">
     <div class="delivery-date">
