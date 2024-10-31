@@ -17,4 +17,4 @@
 </ul>
 
 <h2>Demo</h2>
-![image](https://github.com/user-attachments/assets/132053cb-f4de-4038-a2e3-fbc8e2b56fd0)
+<img src="https://github.com/user-attachments/assets/132053cb-f4de-4038-a2e3-fbc8e2b56fd0">
