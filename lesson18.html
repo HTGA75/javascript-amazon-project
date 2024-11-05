@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>lesson 18</title>
+    </head>
+    <body>
+        <script>
+            /*
+            const xhr = new XMLHttpRequest();
+            xhr.addEventListener('load', (response) => {
+                console.log(xhr.response)
+            })
+            xhr.open('GET', 'https://supersimplebackend.dev/greeting');
+            xhr.send();
+            */
+
+            /*
+            async function greet() {
+                upto 18f
+                const response = await fetch('https://supersimplebackend.dev/greeting');
+
+                const greeting = await response.text();
+                console.log(greeting);
+                
+
+                const sendNameResponse = await fetch('https://supersimplebackend.dev/greeting', {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: 'Harshit Gupta'
+                    })
+                });
+
+                const sendResponse = await sendNameResponse.text();
+                console.log(sendResponse);
+
+                try {
+                    const amz = await fetch('https://amazon.com');
+                    const amzResponse = await amz.json();
+                    console.log(amzResponse);
+                } catch (error) {
+                    console.log('CORS error. Your request was blocked by the backend');
+                }
+               try {
+                    const response = await fetch('https://supersimplebackend.dev/greeting', {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json'
+                    }
+                    });
+
+                    if (response.status >= 400) {
+                        throw response;
+                    }
+                    const greet = await response.text();
+                    console.log(greet);
+               } catch (error) {
+                    if (error.status === 400) {
+                        const errMsg = await error.json();
+                        console.log(errMsg);
+                    } else {
+                        console.log('Network error. Please try again later');
+                    }
+               }
+            }
+            greet();
+            */
+            
+            
+        </script>
+    </body>
+</html>
