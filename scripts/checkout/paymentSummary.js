@@ -3,6 +3,7 @@ import { getProduct } from "../../data/products.js";
 import { getDeliveryOption } from "../../data/deliveryOptions.js";
 import { formatCurrency } from "../utils/money.js";
 import { addOrder } from "../../data/order.js";
+import { createOrderGrid } from "../orders.js";
 
 export function renderPaymentSummary() {
     let productPriceCents = 0;
@@ -73,7 +74,7 @@ export function renderPaymentSummary() {
         } catch (error) {
             console.log('Unexpected error. Try again later.');
         }
-
+        createOrderGrid();
         window.location.href = 'orders.html';
     });
 }
