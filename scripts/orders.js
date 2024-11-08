@@ -1,6 +1,7 @@
 import { orders, addOrder } from "../data/order.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 import { getProduct, loadProductsFetch, products } from "../data/products.js";
+import { cart, addToCart } from "../data/cart.js";
 
 export async function createOrderGrid() {
     let html = '';
@@ -8,10 +9,7 @@ export async function createOrderGrid() {
     orders.forEach((element) => {
         let productDetailsHtml = '';
         element.products.forEach((product) => {
-          console.log(product);
-          console.log(product.productId);
           const currentProduct = getProduct(product.productId);
-          console.log(currentProduct);
           productDetailsHtml += `
           <div class="product-image-container">
               <img src="${currentProduct.image}">
@@ -27,14 +25,14 @@ export async function createOrderGrid() {
               <div class="product-quantity">
                 Quantity: ${product.quantity}
               </div>
-              <button class="buy-again-button button-primary">
+              <button class="buy-again-button js-buy-again-button button-primary" data-product-id="${currentProduct.id}">
                 <img class="buy-again-icon" src="images/icons/buy-again.png">
                 <span class="buy-again-message">Buy it again</span>
               </button>
             </div>
 
             <div class="product-actions">
-              <a href="tracking.html?orderId=123&prductId=145">
+              <a href="tracking.html?orderId=${element.id}&prductId=${currentProduct.id}">
                 <button class="track-package-button button-secondary">
                   Track package
                 </button>
@@ -69,6 +67,13 @@ export async function createOrderGrid() {
     });
 
     document.querySelector('.js-orders-grid').innerHTML = html;
+
+    document.querySelectorAll('.js-buy-again-button').forEach((buyItAgain) => {
+      buyItAgain.addEventListener('click', () => {
+        const productId = buyItAgain.dataset.productId;
+        addToCart(productId);
+      });
+    })
 }
 
 createOrderGrid();
