@@ -32,7 +32,7 @@ export async function createOrderGrid() {
             </div>
 
             <div class="product-actions">
-              <a href="tracking.html?orderId=${element.id}&prductId=${currentProduct.id}">
+              <a href="tracking.html?orderId=${element.id}&productId=${currentProduct.id}">
                 <button class="track-package-button button-secondary">
                   Track package
                 </button>
