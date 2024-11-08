@@ -18,6 +18,7 @@ class Product {
     this.name = productDetails.name;
     this.rating = productDetails.rating;
     this.priceCents = productDetails.priceCents;
+    this.keywords = productDetails.keywords;
   }
 
   id;
@@ -25,6 +26,7 @@ class Product {
   name;
   rating;
   priceCents;
+  keywords;
 
   getStarsUrl(){
     return `images/ratings/rating-${this.rating.stars * 10}.png`
@@ -79,7 +81,7 @@ loadProductsFetch().then(() => {
   console.log('next step')
 });
 */
-
+/*
 export function loadProducts(func) {
   const xhr = new XMLHttpRequest();
   xhr.addEventListener('load', () => {
@@ -101,7 +103,7 @@ export function loadProducts(func) {
 
   xhr.open('GET', 'https://supersimplebackend.dev/products');
   xhr.send();
-}
+}*/
 
 /*
 export const products = [

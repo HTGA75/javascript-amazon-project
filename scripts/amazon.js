@@ -1,34 +1,52 @@
 import {addToCart, cart} from "../data/cart.js";
-import {products, loadProducts} from "../data/products.js";
+import {products, loadProductsFetch} from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
 
-loadProducts(renderProductsGrid);
 
-
-function renderProductsGrid() {
+async function renderProductsGrid() {
+  await loadProductsFetch()
   let productsHTML = ``;
-  products.forEach(products => {
+  const url = new URL(window.location.href);
+  const search = url.searchParams.get('search');
+  
+  let filteredProducts = products;
+
+  if (search) {
+    filteredProducts = products.filter((product) => {
+      let matchingKeyword = false;
+
+      product.keywords.forEach((keyword) => {
+        if (keyword.toLowerCase().includes(search.toLowerCase)) {
+          matchingKeyword = true;
+        }
+      });
+      return matchingKeyword || product.name.toLowerCase().includes(search.toLowerCase());
+    });
+  }
+
+
+  filteredProducts.forEach(product => {
     productsHTML += `
     <div class="product-container">
         <div class="product-image-container">
           <img class="product-image"
-            src="${products.image}">
+            src="${product.image}">
         </div>
 
         <div class="product-name limit-text-to-2-lines">
-          ${products.name}
+          ${product.name}
         </div>
 
         <div class="product-rating-container">
           <img class="product-rating-stars"
-            src="${products.getStarsUrl()}">
+            src="${product.getStarsUrl()}">
           <div class="product-rating-count link-primary">
-            ${products.rating.count}
+            ${product.rating.count}
           </div>
         </div>
 
         <div class="product-price">
-          ${products.getPrice()}
+          ${product.getPrice()}
         </div>
 
         <div class="product-quantity-container">
@@ -46,7 +64,7 @@ function renderProductsGrid() {
           </select>
         </div>
 
-        ${products.extraInfoHTML()/*Polymorphism*/}
+        ${product.extraInfoHTML()/*Polymorphism*/}
 
         <div class="product-spacer"></div>
 
@@ -55,7 +73,7 @@ function renderProductsGrid() {
           Added
         </div>
 
-        <button class="add-to-cart-button button-primary js-add-to-cart" data-product-id="${products.id}">
+        <button class="add-to-cart-button button-primary js-add-to-cart" data-product-id="${product.id}">
           Add to Cart
         </button>
       </div>
@@ -83,4 +101,20 @@ function renderProductsGrid() {
       updateCart();
     });
   });
+
+  document.querySelector('.js-search-button').addEventListener('click', () => {
+    const searchTerm = document.querySelector('.js-search-bar').value;
+
+    window.location.href = `amazon.html?search=${searchTerm}`
+  })
+
+  document.querySelector('.js-search-bar').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const searchTerm = document.querySelector('.js-search-bar').value;
+
+      window.location.href = `amazon.html?search=${searchTerm}`;
+    }
+  })
 };
+
+renderProductsGrid();
