@@ -7,7 +7,6 @@ async function trackOrder() {
     const orderId = url.searchParams.get('orderId');
     const productId = url.searchParams.get('productId');
     const order = getOrder(orderId);
-    console.log(order);
     await loadProductsFetch();
     const product = getProduct(productId);
     let productDeliveryTime = '';
@@ -18,9 +17,14 @@ async function trackOrder() {
             productQuantity = element.quantity;
         }
     })
-    console.log(productDeliveryTime);
-    console.log(productQuantity);
-    console.log(product);
+    const today = dayjs();
+    console.log(today);
+    const orderTime = dayjs(order.orderTime);
+    const deliveryTime = dayjs(productDeliveryTime);
+    console.log(orderTime);
+    console.log(deliveryTime);
+    const presentProgress = (((today - orderTime) / (deliveryTime - orderTime)) * 100).toFixed(2); 
+    console.log(presentProgress);
 
     let html = `
     <div class="order-tracking">
@@ -43,19 +47,19 @@ async function trackOrder() {
         <img class="product-image" src="${product.image}">
 
         <div class="progress-labels-container">
-            <div class="progress-label">
+            <div class="progress-label ${presentProgress < 50 ? 'current-status' : ''}">
             Preparing
             </div>
-            <div class="progress-label current-status">
+            <div class="progress-label ${presentProgress >= 50 ? 'current-status' : ''}">
             Shipped
             </div>
-            <div class="progress-label">
+            <div class="progress-label ${presentProgress >= 100 ? 'current-status' : ''}">
             Delivered
             </div>
         </div>
 
         <div class="progress-bar-container">
-            <div class="progress-bar"></div>
+            <div class="progress-bar" style="width: ${presentProgress}%"></div>
         </div>
     </div>`;
 
