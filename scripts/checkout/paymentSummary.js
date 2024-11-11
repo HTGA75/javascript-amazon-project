@@ -1,4 +1,4 @@
-import { cart } from "../../data/cart.js";
+import { cart, resetCart } from "../../data/cart.js";
 import { getProduct } from "../../data/products.js";
 import { getDeliveryOption } from "../../data/deliveryOptions.js";
 import { formatCurrency } from "../utils/money.js";
@@ -71,10 +71,10 @@ export function renderPaymentSummary() {
             
             const order = await response.json();
             addOrder(order);
-            localStorage.removeItem('cart');
         } catch (error) {
             console.log('Unexpected error. Try again later.');
         }
+        resetCart();
         createOrderGrid();
         window.location.href = 'orders.html';
     });

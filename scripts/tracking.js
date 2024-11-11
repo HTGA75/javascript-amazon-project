@@ -25,6 +25,7 @@ async function trackOrder() {
     console.log(deliveryTime);
     const presentProgress = (((today - orderTime) / (deliveryTime - orderTime)) * 100).toFixed(2); 
     console.log(presentProgress);
+    const deliveredMessage = today < deliveryTime ? 'Arriving on' : 'Delivered on';
 
     let html = `
     <div class="order-tracking">
@@ -33,7 +34,7 @@ async function trackOrder() {
         </a>
 
         <div class="delivery-date">
-            Arriving on ${dayjs(productDeliveryTime).format('dddd, MMMM D')}
+            ${deliveredMessage} ${dayjs(productDeliveryTime).format('dddd, MMMM D')}
         </div>
 
         <div class="product-info">
