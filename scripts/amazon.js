@@ -5,6 +5,7 @@ import { formatCurrency } from "./utils/money.js";
 
 async function renderProductsGrid() {
   await loadProductsFetch()
+  updateCart();
   let productsHTML = ``;
   const url = new URL(window.location.href);
   const search = url.searchParams.get('search');
@@ -50,7 +51,7 @@ async function renderProductsGrid() {
         </div>
 
         <div class="product-quantity-container">
-          <select>
+          <select class="js-quantity-selector-${product.id}">
             <option selected value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
