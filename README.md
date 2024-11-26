@@ -1,4 +1,4 @@
-<h1>Amazon Clone</h1>h1>
+<h1>Amazon Clone</h1>
 <p>An Amazon clone built with HTML, CSS, and Vanilla JavaScript. This project replicates basic e-commerce features like displaying products, adding items to the cart, and handling a simple checkout process.</p>
 
 <h2>Table of Contents</h2>
