@@ -153,7 +153,7 @@ export function renderOrderSummary() {
       );
       const newQuantity = Number(quantityInput.value);
 
-      if (newQuantity < 0 || newQuantity >= 1000) {
+      if (newQuantity <= 0 || newQuantity >= 1000) {
         alert('Quantity must be at least 0 and less than 1000');
         return;
       }
